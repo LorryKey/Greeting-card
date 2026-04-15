@@ -1,109 +1,183 @@
-const SUPABASE_URL = window.SUPABASE_URL || "https://YOUR_PROJECT.supabase.co";
-const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || "YOUR_SUPABASE_ANON_KEY";
+const wishes = [
+  {
+    name: "Ваня",
+    text: "Пусть каждый день приносит драйв, удачу и сильные идеи.",
+  },
+  {
+    name: "Петя",
+    text: "Желаю крепкого здоровья, легких побед и кайфа от жизни.",
+  },
+  {
+    name: "Оля",
+    text: "Пусть рядом всегда будут любовь, смех и теплые люди.",
+  },
+  {
+    name: "Света",
+    text: "Пускай мечты сбываются красиво, смело и точно в срок.",
+  },
+  {
+    name: "Лариса",
+    text: "Желаю счастья, вдохновения и ярких моментов каждый день.",
+  },
+];
 
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const stickerRotations = ["-8deg", "7deg", "-6deg", "9deg", "-5deg"];
+const stickerDelays = ["0.09s", "0.15s", "0.21s", "0.27s", "0.33s"];
 
-const COLORS = ["#FFF59D", "#FFCDD2", "#BBDEFB", "#C8E6C9"];
-const BOARD_ID = "main";
+const stickersEl = document.getElementById("stickers");
+const wishesPanel = document.getElementById("wishesPanel");
+const celebrateButton = document.getElementById("celebrateButton");
+const confettiLayer = document.getElementById("confettiLayer");
+const wishesNote = document.getElementById("wishesNote");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const boardEl = document.getElementById("board");
-const formEl = document.getElementById("wishForm");
-const nameEl = document.getElementById("name");
-const textEl = document.getElementById("text");
+let isCelebrated = false;
 
-init();
+renderStickers();
 
-async function init() {
-  if (SUPABASE_URL.includes("YOUR_PROJECT") || SUPABASE_ANON_KEY.includes("YOUR_SUPABASE")) {
-    showNotice("Укажите SUPABASE_URL и SUPABASE_ANON_KEY в script.js или через window.*");
+celebrateButton.addEventListener("click", () => {
+  if (isCelebrated) {
     return;
   }
 
-  await fetchMessages();
-}
+  isCelebrated = true;
+  document.body.classList.add("is-celebrated");
+  celebrateButton.classList.add("is-exploding");
+  celebrateButton.disabled = true;
+  wishesNote.hidden = true;
+  wishesPanel.hidden = false;
 
-async function fetchMessages() {
-  const { data, error } = await supabaseClient
-    .from("messages")
-    .select("*")
-    .eq("board_id", BOARD_ID)
-    .order("id", { ascending: false });
+  window.requestAnimationFrame(() => {
+    wishesPanel.classList.add("is-revealed");
+  });
 
-  if (error) {
-    showNotice("Не удалось загрузить сообщения");
-    return;
+  window.setTimeout(
+    () => {
+      celebrateButton.hidden = true;
+    },
+    reducedMotion ? 0 : 390
+  );
+
+  if (!reducedMotion) {
+    launchConfetti(celebrateButton);
   }
+});
 
-  renderMessages(data || []);
+function renderStickers() {
+  stickersEl.innerHTML = wishes
+    .map(
+      (wish, index) => `
+        <article
+          class="sticker"
+          style="--rotation: ${stickerRotations[index]}; --delay: ${stickerDelays[index]};"
+        >
+          <p class="sticker__message">${wish.text}</p>
+          <p class="sticker__author">${wish.name}</p>
+        </article>
+      `
+    )
+    .join("");
 }
 
-async function addMessage(content, authorName) {
-  const newMessage = {
-    board_id: BOARD_ID,
-    content,
-    author_name: authorName || "Anonymous",
-    x: Math.random() * 70,
-    y: Math.random() * 70,
-    rotation: Math.random() * 20 - 10,
-    color: COLORS[Math.floor(Math.random() * COLORS.length)],
-  };
+function launchConfetti(trigger) {
+  const rect = trigger.getBoundingClientRect();
+  const originX = rect.left + rect.width / 2;
+  const originY = rect.top + rect.height / 2;
+  const colors = ["#ffffff", "#ffe3ff", "#ff8bdd", "#ff72cb", "#d78dff", "#9d6dff", "#ffd66e"];
+  const layers = [
+    {
+      count: 36,
+      distance: [220, 420],
+      gravity: [40, 160],
+      size: [12, 22],
+      duration: [600, 900],
+      delay: [0, 30],
+      glow: [16, 26],
+      blur: [0, 0.4],
+      opacity: [0.96, 1],
+      stretch: [1.8, 2.4],
+      endScale: [1.2, 1.45],
+    },
+    {
+      count: 44,
+      distance: [340, 680],
+      gravity: [90, 240],
+      size: [9, 17],
+      duration: [720, 1050],
+      delay: [10, 55],
+      glow: [12, 20],
+      blur: [0.2, 0.9],
+      opacity: [0.86, 0.95],
+      stretch: [1.6, 2.2],
+      endScale: [0.95, 1.12],
+    },
+    {
+      count: 52,
+      distance: [480, 940],
+      gravity: [140, 340],
+      size: [6, 13],
+      duration: [880, 1300],
+      delay: [20, 95],
+      glow: [8, 16],
+      blur: [0.5, 1.6],
+      opacity: [0.72, 0.86],
+      stretch: [1.4, 2.05],
+      endScale: [0.72, 0.94],
+    },
+  ];
 
-  const { error } = await supabaseClient.from("messages").insert(newMessage);
+  layers.forEach((layer, layerIndex) => {
+    for (let index = 0; index < layer.count; index += 1) {
+      const piece = document.createElement("span");
+      const angle =
+        (Math.PI * 2 * index) / layer.count +
+        randomBetween(-0.34, 0.34) +
+        layerIndex * 0.08;
+      const distance = randomBetween(layer.distance[0], layer.distance[1]);
+      const gravity = randomBetween(layer.gravity[0], layer.gravity[1]);
+      const size = randomBetween(layer.size[0], layer.size[1]);
+      const duration = randomBetween(layer.duration[0], layer.duration[1]);
+      const delay = randomBetween(layer.delay[0], layer.delay[1]);
+      const glow = randomBetween(layer.glow[0], layer.glow[1]);
+      const blur = randomBetween(layer.blur[0], layer.blur[1]);
+      const peakOpacity = randomBetween(layer.opacity[0], layer.opacity[1]);
+      const stretch = randomBetween(layer.stretch[0], layer.stretch[1]);
+      const endScale = randomBetween(layer.endScale[0], layer.endScale[1]);
+      const targetX = Math.cos(angle) * distance;
+      const targetY = Math.sin(angle) * distance + gravity;
+      const spin = `${randomBetween(-760, 760)}deg`;
+      const randomType = Math.random();
 
-  if (error) {
-    showNotice("Не удалось добавить сообщение");
-    return;
-  }
+      piece.className =
+        randomType > 0.74
+          ? "confetti confetti--dot"
+          : randomType > 0.38
+            ? "confetti confetti--wide"
+            : "confetti";
 
-  await fetchMessages();
-}
+      piece.style.setProperty("--origin-x", `${originX}px`);
+      piece.style.setProperty("--origin-y", `${originY}px`);
+      piece.style.setProperty("--target-x", `${targetX}px`);
+      piece.style.setProperty("--target-y", `${targetY}px`);
+      piece.style.setProperty("--spin", spin);
+      piece.style.setProperty("--size", `${size}px`);
+      piece.style.setProperty("--duration", `${duration}ms`);
+      piece.style.setProperty("--delay", `${delay}ms`);
+      piece.style.setProperty("--color", colors[(index + layerIndex) % colors.length]);
+      piece.style.setProperty("--glow", `${glow}px`);
+      piece.style.setProperty("--blur", `${blur}px`);
+      piece.style.setProperty("--peak-opacity", peakOpacity);
+      piece.style.setProperty("--stretch", stretch);
+      piece.style.setProperty("--end-scale", endScale);
+      piece.style.setProperty("--spawn-scale", randomBetween(0.16, 0.28));
+      piece.style.setProperty("--radius", randomType > 0.74 ? "50%" : "999px");
 
-function renderMessages(messages) {
-  boardEl.innerHTML = "";
-
-  messages.forEach((msg) => {
-    const sticker = document.createElement("article");
-    sticker.className = "sticker";
-    sticker.style.left = `${msg.x}%`;
-    sticker.style.top = `${msg.y}%`;
-    sticker.style.transform = `rotate(${msg.rotation}deg)`;
-    sticker.style.backgroundColor = msg.color || COLORS[0];
-
-    const content = document.createElement("p");
-    content.className = "sticker__content";
-    content.textContent = msg.content;
-
-    const author = document.createElement("p");
-    author.className = "sticker__author";
-    author.textContent = `— ${msg.author_name || "Anonymous"}`;
-
-    sticker.append(content, author);
-    boardEl.appendChild(sticker);
+      confettiLayer.appendChild(piece);
+      piece.addEventListener("animationend", () => piece.remove(), { once: true });
+    }
   });
 }
 
-formEl.addEventListener("submit", async (event) => {
-  event.preventDefault();
-
-  const content = textEl.value.trim();
-  const author = nameEl.value.trim();
-
-  if (!content) {
-    return;
-  }
-
-  await addMessage(content, author);
-  textEl.value = "";
-});
-
-function showNotice(text) {
-  const existing = document.querySelector(".notice");
-  if (existing) {
-    existing.remove();
-  }
-
-  const notice = document.createElement("div");
-  notice.className = "notice";
-  notice.textContent = text;
-  document.body.appendChild(notice);
+function randomBetween(min, max) {
+  return Math.random() * (max - min) + min;
 }
