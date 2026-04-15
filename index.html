@@ -3,41 +3,88 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Birthday Wishes Board</title>
+    <meta name="color-scheme" content="dark" />
+    <title>Рома, с днем рождения!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Unbounded:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="page" aria-label="Birthday wishes board">
-      <h1>🎉 Happy Birthday!</h1>
+    <div class="backdrop" aria-hidden="true">
+      <img class="ornament" src="shapes/Shape2.png" alt="" style="--x:8%; --y:8%; --size:12vw; --base-rotate:-10deg; --drift-x:8px; --drift-y:6px; --rotate-shift:6deg; --duration:14s; --delay:-1.2s; --opacity:0.88;" />
+      <img class="ornament" src="shapes/Shape6.png" alt="" style="--x:26%; --y:9%; --size:5.6vw; --base-rotate:4deg; --drift-x:-5px; --drift-y:4px; --rotate-shift:-4deg; --duration:11.5s; --delay:-3.1s; --opacity:0.55;" />
+      <img class="ornament" src="shapes/Shape1.png" alt="" style="--x:45%; --y:8%; --size:7vw; --base-rotate:-16deg; --drift-x:5px; --drift-y:6px; --rotate-shift:7deg; --duration:13.8s; --delay:-2.4s; --opacity:0.66;" />
+      <img class="ornament" src="shapes/Shape3.png" alt="" style="--x:64%; --y:9%; --size:4.8vw; --base-rotate:0deg; --drift-x:-4px; --drift-y:5px; --rotate-shift:-6deg; --duration:10.8s; --delay:-4.2s; --opacity:0.6;" />
+      <img class="ornament" src="shapes/Shape6.png" alt="" style="--x:83%; --y:9%; --size:8.2vw; --base-rotate:0deg; --drift-x:6px; --drift-y:5px; --rotate-shift:4deg; --duration:14.5s; --delay:-5.2s; --opacity:0.82;" />
+      <img class="ornament" src="shapes/Shape1.png" alt="" style="--x:8%; --y:28%; --size:7.4vw; --base-rotate:-8deg; --drift-x:6px; --drift-y:-6px; --rotate-shift:8deg; --duration:12.6s; --delay:-2.7s; --opacity:0.74;" />
+      <img class="ornament" src="shapes/Shape3.png" alt="" style="--x:23%; --y:33%; --size:4.6vw; --base-rotate:8deg; --drift-x:-5px; --drift-y:4px; --rotate-shift:-5deg; --duration:11.4s; --delay:-1.6s; --opacity:0.56;" />
+      <img class="ornament" src="shapes/Shape4.png" alt="" style="--x:85%; --y:31%; --size:10.6vw; --base-rotate:7deg; --drift-x:-7px; --drift-y:6px; --rotate-shift:-7deg; --duration:13.6s; --delay:-3.8s; --opacity:0.9;" />
+      <img class="ornament" src="shapes/Shape1.png" alt="" style="--x:94%; --y:24%; --size:5.6vw; --base-rotate:18deg; --drift-x:4px; --drift-y:-4px; --rotate-shift:5deg; --duration:11.9s; --delay:-5.4s; --opacity:0.62;" />
+      <img class="ornament" src="shapes/Shape2.png" alt="" style="--x:7%; --y:49%; --size:8vw; --base-rotate:-6deg; --drift-x:6px; --drift-y:5px; --rotate-shift:6deg; --duration:12.9s; --delay:-4.7s; --opacity:0.72;" />
+      <img class="ornament" src="shapes/Shape4.png" alt="" style="--x:17%; --y:59%; --size:5.8vw; --base-rotate:-10deg; --drift-x:5px; --drift-y:-5px; --rotate-shift:5deg; --duration:10.9s; --delay:-2.2s; --opacity:0.7;" />
+      <img class="ornament" src="shapes/Shape3.png" alt="" style="--x:92%; --y:52%; --size:3.8vw; --base-rotate:0deg; --drift-x:-3px; --drift-y:4px; --rotate-shift:-5deg; --duration:10.2s; --delay:-4.9s; --opacity:0.74;" />
+      <img class="ornament" src="shapes/Shape1.png" alt="" style="--x:95%; --y:63%; --size:6vw; --base-rotate:10deg; --drift-x:5px; --drift-y:3px; --rotate-shift:6deg; --duration:12.2s; --delay:-3.4s; --opacity:0.68;" />
+      <img class="ornament" src="shapes/Shape2.png" alt="" style="--x:10%; --y:76%; --size:11vw; --base-rotate:-11deg; --drift-x:8px; --drift-y:7px; --rotate-shift:7deg; --duration:14.8s; --delay:-1.8s; --opacity:0.86;" />
+      <img class="ornament" src="shapes/Shape6.png" alt="" style="--x:29%; --y:84%; --size:5.8vw; --base-rotate:5deg; --drift-x:-5px; --drift-y:4px; --rotate-shift:-6deg; --duration:11.6s; --delay:-5.7s; --opacity:0.52;" />
+      <img class="ornament" src="shapes/Shape3.png" alt="" style="--x:50%; --y:89%; --size:4.6vw; --base-rotate:0deg; --drift-x:4px; --drift-y:4px; --rotate-shift:5deg; --duration:10.5s; --delay:-2.9s; --opacity:0.62;" />
+      <img class="ornament" src="shapes/Shape2.png" alt="" style="--x:69%; --y:86%; --size:6vw; --base-rotate:6deg; --drift-x:-4px; --drift-y:5px; --rotate-shift:-5deg; --duration:12.4s; --delay:-4.6s; --opacity:0.68;" />
+      <img class="ornament" src="shapes/Shape1.png" alt="" style="--x:87%; --y:78%; --size:7.2vw; --base-rotate:-12deg; --drift-x:6px; --drift-y:5px; --rotate-shift:8deg; --duration:13.2s; --delay:-3.7s; --opacity:0.74;" />
+    </div>
 
-      <section id="board" class="board" aria-live="polite"></section>
+    <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
 
-      <form id="wishForm" class="wish-form">
-        <label>
-          <span class="sr-only">Your name</span>
-          <input id="name" type="text" placeholder="Your name" maxlength="40" />
-        </label>
-        <label class="wish-input">
-          <span class="sr-only">Write a wish</span>
-          <input
-            id="text"
-            type="text"
-            placeholder="Write a wish..."
-            maxlength="200"
-            required
-          />
-        </label>
-        <button type="submit">Add 🎈</button>
-      </form>
+    <main class="page">
+      <section class="hero" aria-labelledby="hero-title">
+        <h1 class="hero__title" id="hero-title">
+          <span class="hero__name">Рома</span>
+          <span class="hero__headline">с днем рождения!</span>
+        </h1>
+
+        <div class="hero__portrait-shell">
+          <figure class="hero__portrait">
+            <img
+              src="telegram-peer-photo-size-2-440122165613930803-1-0-0 1.png"
+              alt="Портрет Ромы"
+            />
+          </figure>
+        </div>
+
+        <div class="hero__cta">
+          <button class="hero__button" id="celebrateButton" type="button">
+            <span>Поздравляем</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="panel panel--story" aria-labelledby="story-title">
+        <h2 id="story-title">про Рому</h2>
+        <p>
+          Ты умеешь держать курс уверенно, собирать вокруг себя людей и делать любой
+          день заметно теплее. Пусть этот год подарит еще больше ярких моментов,
+          сильных идей, спокойной уверенности и настоящего удовольствия от жизни.
+        </p>
+      </section>
+
+      <section
+        class="panel panel--wishes"
+        id="wishesPanel"
+        aria-labelledby="wishes-title"
+        hidden
+      >
+        <div class="panel__header">
+          <h2 id="wishes-title">Пожелания</h2>
+          <p class="panel__note" id="wishesNote">
+            После клика здесь вспыхнут стикеры с поздравлениями друзей.
+          </p>
+        </div>
+        <div class="stickers" id="stickers" aria-live="polite"></div>
+      </section>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
   </body>
 </html>
