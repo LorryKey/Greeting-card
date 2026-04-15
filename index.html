@@ -3,51 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>С Днем рождения, Рома!</title>
+    <title>Birthday Wishes Board</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="card-page">
-      <section class="hero" aria-labelledby="title">
-        <div class="decor decor--burst" aria-hidden="true"></div>
-        <div class="decor decor--star" aria-hidden="true"></div>
-        <div class="decor decor--ellipse" aria-hidden="true"></div>
-        <h1 id="title">Рома,<br />с&nbsp;Днем рождения!</h1>
+    <main class="page" aria-label="Birthday wishes board">
+      <h1>🎉 Happy Birthday!</h1>
 
-        <div class="photo-stage" role="img" aria-label="Портрет Ромы">
-          <div class="float-shape shape-1"></div>
-          <div class="float-shape shape-2"></div>
-          <div class="float-shape shape-3"></div>
-          <div class="float-shape shape-4"></div>
-          <div class="photo-shadow"></div>
-          <div class="photo-frame">
-            <img src="Frame 1.png" alt="Рома" />
-          </div>
-        </div>
+      <section id="board" class="board" aria-live="polite"></section>
 
-        <article class="panel panel--about">
-          <h2>про&nbsp;Рому...</h2>
-          <p>
-            Пусть каждый день будет таким же тёплым, как улыбки близких, и таким же
-            ярким, как твои идеи.
-          </p>
-        </article>
-
-        <article class="panel panel--wish">
-          <h2>Пожелания</h2>
-          <p>
-            Желаем крепкого здоровья, вдохновения, больших побед и настоящего
-            удовольствия от всего, что ты делаешь. Пусть рядом всегда будут твои люди,
-            а впереди — только крутые поводы для радости!
-          </p>
-        </article>
-      </section>
+      <form id="wishForm" class="wish-form">
+        <label>
+          <span class="sr-only">Your name</span>
+          <input id="name" type="text" placeholder="Your name" maxlength="40" />
+        </label>
+        <label class="wish-input">
+          <span class="sr-only">Write a wish</span>
+          <input
+            id="text"
+            type="text"
+            placeholder="Write a wish..."
+            maxlength="200"
+            required
+          />
+        </label>
+        <button type="submit">Add 🎈</button>
+      </form>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
   </body>
 </html>
