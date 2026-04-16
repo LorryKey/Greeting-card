@@ -338,12 +338,13 @@ body.is-celebrated .panel__note {
 
 .stickers {
   position: relative;
-  min-height: 540px;
   padding-top: 18px;
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
   align-content: start;
+  max-width: 820px;
+  margin: 0 auto;
 }
 
 .sticker {
@@ -351,7 +352,7 @@ body.is-celebrated .panel__note {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  min-height: 168px;
+  aspect-ratio: 1 / 1;
   padding: 20px 18px 16px;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -368,30 +369,6 @@ body.is-celebrated .panel__note {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), transparent 46%);
 }
 
-.sticker:nth-child(1) {
-  grid-column: 1 / span 4;
-}
-
-.sticker:nth-child(2) {
-  grid-column: 8 / span 4;
-  margin-top: 4px;
-}
-
-.sticker:nth-child(3) {
-  grid-column: 2 / span 4;
-  margin-top: -8px;
-}
-
-.sticker:nth-child(4) {
-  grid-column: 7 / span 4;
-  margin-top: -10px;
-}
-
-.sticker:nth-child(5) {
-  grid-column: 4 / span 5;
-  margin-top: -2px;
-}
-
 .sticker__message,
 .sticker__author {
   position: relative;
@@ -400,10 +377,12 @@ body.is-celebrated .panel__note {
 
 .sticker__message {
   margin: 0;
-  max-width: 30ch;
-  font-size: 1rem;
+  max-width: none;
+  font-size: clamp(0.92rem, 1.2vw, 1rem);
   line-height: 1.45;
   color: #fff;
+  overflow: auto;
+  padding-right: 4px;
 }
 
 .sticker__author {
@@ -573,20 +552,8 @@ body.is-celebrated .sticker {
   }
 
   .stickers {
-    min-height: auto;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
-  }
-
-  .sticker:nth-child(n) {
-    grid-column: auto;
-    margin-top: 0;
-  }
-
-  .sticker:nth-child(5) {
-    grid-column: 1 / -1;
-    max-width: 280px;
-    justify-self: center;
   }
 
   .sticker__message {
@@ -612,10 +579,6 @@ body.is-celebrated .sticker {
 
   .panel--story p {
     font-size: 0.96rem;
-  }
-
-  .sticker {
-    min-height: 150px;
   }
 
   .panel--wishes {
