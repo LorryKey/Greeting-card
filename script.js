@@ -73,7 +73,7 @@ function renderStickers() {
       (wish, index) => `
         <article
           class="sticker"
-          style="--rotation: ${stickerRotations[index]}; --delay: ${stickerDelays[index]};"
+          style="--rotation: ${stickerRotations[index % stickerRotations.length]}; --delay: ${stickerDelays[index % stickerDelays.length]};"
         >
           <p class="sticker__message">${wish.text}</p>
           <p class="sticker__author">${wish.name}</p>
