@@ -352,7 +352,7 @@ body.is-celebrated .panel__note {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  aspect-ratio: 1 / 1;
+  min-height: 230px;
   padding: 20px 18px 16px;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -381,8 +381,7 @@ body.is-celebrated .panel__note {
   font-size: clamp(0.92rem, 1.2vw, 1rem);
   line-height: 1.45;
   color: #fff;
-  overflow: auto;
-  padding-right: 4px;
+  overflow: visible;
 }
 
 .sticker__author {
