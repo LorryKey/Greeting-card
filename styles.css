@@ -366,17 +366,6 @@ body.is-celebrated .panel__note {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), transparent 46%);
 }
 
-.sticker::after {
-  content: "";
-  position: absolute;
-  top: -14px;
-  right: -12px;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.16);
-}
-
 .sticker:nth-child(1) {
   grid-column: 1 / span 4;
 }
