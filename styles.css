@@ -383,25 +383,6 @@ body.is-celebrated .panel__note {
   color: #fff;
   overflow: auto;
   padding-right: 4px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.28) transparent;
-}
-
-.sticker__message::-webkit-scrollbar {
-  width: 6px;
-}
-
-.sticker__message::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.sticker__message::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.24);
-}
-
-.sticker__message::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.34);
 }
 
 .sticker__author {
