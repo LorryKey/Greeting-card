@@ -386,6 +386,8 @@ body.is-celebrated .panel__note {
 }
 
 .sticker__author {
+  position: relative;
+  z-index: 2;
   margin: auto 0 0;
   padding-top: 18px;
   font-size: 0.82rem;
@@ -393,6 +395,17 @@ body.is-celebrated .panel__note {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.84);
+}
+
+.sticker__author::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  right: -18px;
+  top: -24px;
+  height: 26px;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(157, 88, 255, 0), rgba(128, 52, 247, 0.95));
 }
 
 body.is-celebrated .sticker {
